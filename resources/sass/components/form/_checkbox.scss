@@ -1,0 +1,138 @@
+.checkbox-wrapper {
+  z-index: 0;
+  position: relative;
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 31px;
+  margin: 0.25rem 0;
+  
+  > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -12px;
+    top: -10px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+    
+    &:focus {
+      opacity: 0.12;
+    }
+    
+    &:active {
+      opacity: 1;
+      transform: scale(0);
+      transition: transform 0s, opacity 0s;
+      + span {
+        &:before {
+          border-color: $primary;
+        }
+      }
+    }
+
+    &:checked:active {
+      + span {
+        &::before {
+          border-color: transparent;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+      }
+    }
+
+    &:disabled {
+      opacity: 0;
+
+      + span {
+        color: rgba(0, 0, 0, 0.38);
+        cursor: initial;
+
+        &:before {
+          border-color: #ced4da;
+        }
+      }
+      &:checked + span::before,
+      &:indeterminate + span::before {
+          border-color: transparent;
+          background-color: currentColor;
+      }
+    }
+
+    &:checked, &:indeterminate {
+      background-color: $primary;
+
+      + span {
+        &:before {
+          border-color: $primary;
+          background-color: $primary;
+        }
+        &:after {
+          border-color: rgb(255, 255, 255);
+        }
+      }
+    }
+    &:indeterminate {
+      + span {
+        &:after {
+          border-left: none;
+          transform: translate(4px, 3px);
+        }
+      }
+    }
+  }
+
+  > span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      box-sizing: border-box;
+      margin: 3px 15px 3px 1px;
+      border: solid 1px; /* Safari */
+      border-color: #ced4da;
+      border-radius: 5px;
+      width: 25px;
+      height: 25px;
+      vertical-align: top;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 6px;
+      left: 3px;
+      width: 14px;
+      height: 7px;
+      border: solid 3px transparent;
+      border-right: none;
+      border-top: none;
+      transform: translate(3px, 4px) rotate(-45deg);
+    }
+  }
+  &:hover {
+    > input {
+      opacity: 0.04;
+      
+      &:focus {
+        opacity: 0.16;
+      }
+    }
+  }
+}
