@@ -38,7 +38,6 @@ class AdminUsersController
      */
     public function store(Request $request) {
 
-
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -46,8 +45,8 @@ class AdminUsersController
         ]);
 
         $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->fill($request->except('password'));
+        $user->is_admin = $request->is_admin ? true : false;
         $user->password = Hash::make($request->password);
         $user->save();
 
@@ -67,14 +66,23 @@ class AdminUsersController
         return view('users.show', compact('user'));
     }
 
-        /**
-     * Show user
+    /**
+     * Show profile
      * @param User $user
      * @return View
      */
     public function profile() {
         $user = Auth::User();
         return view('users.profile', compact('user'));
+    }
+
+    /**
+     * Show all users
+     * @return View
+     */
+    public function transactions(User $user)
+    {
+        return view('users.transactions', compact('user'));
     }
 
     /**
@@ -113,7 +121,7 @@ class AdminUsersController
         Session::flash('name', $user->firstname . " " . $user->surname);
         Session::flash('alert-class', 'alert-success');
 
-        return redirect(route('users.show', $user));
+        return redirect(route('admin.users.show', $user));
     }
 
     /**
@@ -137,6 +145,6 @@ class AdminUsersController
         Session::flash('name', $user->name);
         Session::flash('alert-class', 'alert-success');
 
-        return redirect(route('users.index'));
+        return redirect(route('admin.users.index'));
     }
 }

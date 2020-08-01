@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="" class="card card-body">
+                <a href="{{ route('admin.transactions.index') }}" class="card card-body">
                     <h3 class="mb-0">Transactions</h3>
                 </a>
             </div>
@@ -20,7 +20,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="" class="card card-body">
+                <a href="{{ route('profile') }}" class="card card-body">
                     <h3 class="mb-0">My Transactions</h3>
                 </a>
             </div>

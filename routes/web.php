@@ -29,10 +29,18 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::post('/create', 'AdminUsersController@store')->name('store');
                 Route::prefix('{user}')->group(function () {
                     Route::get('/', 'AdminUsersController@show')->name('show');
+                    Route::get('/transactions', 'AdminUsersController@transactions')->name('transactions');
                     Route::get('/edit', 'AdminUsersController@edit')->name('edit');
                     Route::post('/edit', 'AdminUsersController@update')->name('update');
                     Route::get('/delete', 'AdminUsersController@confirmdelete')->name('confirmdelete');
                     Route::post('/delete', 'AdminUsersController@delete')->name('delete');
+                });
+            });
+
+            Route::prefix('transactions')->name('transactions.')->group(function () {
+                Route::get('/', 'TransactionController@index')->name('index');
+                Route::prefix('{transactions}')->group(function () {
+                    Route::get('/', 'TransactionController@show')->name('show');
                 });
             });
         });

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Transaction extends Model
 {
@@ -12,6 +13,11 @@ class Transaction extends Model
      * @const int
      */
     const TYPE_CREDIT = 1;
+
+
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
     /**
      * Set the amount into pence.
@@ -28,9 +34,10 @@ class Transaction extends Model
      *
      * @return int
      */
-    public function getFormattedAmountAttibute()
+    public function getFormattedAmountAttribute()
     {
         return $this->amount / 100;
     }
+
 
 }

@@ -24,6 +24,12 @@ Breadcrumbs::for('admin.users.show', function ($trail, $user) {
 });
 
 // Dashboard > Users > [user]
+Breadcrumbs::for('admin.users.transactions', function ($trail, $user) {
+    $trail->parent('admin.users.show', $user);
+    $trail->push('Transactions');
+});
+
+// Dashboard > Users > [user]
 Breadcrumbs::for('admin.users.edit', function ($trail, $user) {
     $trail->parent('admin.users.show', $user);
     $trail->push('Edit');

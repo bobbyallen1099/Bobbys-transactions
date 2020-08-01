@@ -16,33 +16,14 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <h2>{{ $user->firstname }} {{ $user->surname }}</h2>
+                    <h2>{{ $user->name }}</h2>
                     <h4>{{ $user->email }}</h4>
-                    <h4>{{ $user->phone }}</h4>
-                </div>
-                <div class="col-md-4">
-                    <h4>
-                        @if (!empty($user->address_line_1))                          
-                            {{ $user->address_line_1 }} <br>
-                        @endif
-                        @if (!empty($user->address_line_2 ))                           
-                            {{ $user->address_line_2 }} <br>
-                        @endif
-                        @if (!empty($user->town ))                            
-                            {{ $user->town }} <br>
-                        @endif
-                        @if (!empty($user->county ) )                           
-                            {{ $user->county }} <br>
-                        @endif
-                        @if (!empty( $user->postcode ))                            
-                            {{ $user->postcode }} <br>
-                        @endif
-                    </h4>
                 </div>
             </div>
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-xs">Edit</a>
+            <a href="{{ route('admin.users.transactions', $user) }}" class="btn btn-info btn-xs">View transactions</a>
 
             @if ($user != Auth::user())
                 <a href="{{ route('admin.users.confirmdelete', $user) }}" class="btn btn-danger btn-xs">Delete</a>

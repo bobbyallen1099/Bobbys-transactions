@@ -24,6 +24,7 @@
             <thead>
                 <tr>
                     <th class="border-top-0">Email</th>
+                    <th class="border-top-0">Admin</th>
                     <th class="border-top-0">Created on</th>
                     <th class="border-top-0">Modified on</th>
                     <th class="border-top-0" width="150">Actions</th>
@@ -33,6 +34,13 @@
                 @foreach ($users as $user)
                     <tr>
                         <td><a href="{{ route('admin.users.show', $user) }}">{{ $user->email }}</a></td>
+                        <td>
+                            @if ($user->is_admin)
+                                Yes
+                            @else
+                                No
+                            @endif
+                        </td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
                         <td>

@@ -44,9 +44,15 @@
                         <li>
                             <a href="{{ route('admin.users.index') }}"><i class="fas fa-fw fa-users"></i> <span>Users</span></a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.transactions.index') }}"><i class="fas fa-fw fa-pound-sign"></i> <span>Transactions</span></a>
+                        </li>
                     @else
                         <li>
                             <a href="{{ route('profile') }}"><i class="fas fa-fw fa-user"></i> <span>Profile</span></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('profile') }}"><i class="fas fa-fw fa-user"></i> <span>My Transactions</span></a>
                         </li>
                     @endif
 
