@@ -38,13 +38,14 @@ class AdminUsersController
      */
     public function store(Request $request) {
 
+
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $user = User::create();
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -54,7 +55,7 @@ class AdminUsersController
         Session::flash('name', $user->email);
         Session::flash('alert-class', 'alert-success');
 
-        return redirect(route('users.show', $user));
+        return redirect(route('admin.users.show', $user));
     }
 
     /**
