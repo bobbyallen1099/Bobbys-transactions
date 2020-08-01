@@ -18,7 +18,7 @@ class Transaction extends Model
      *
      * @var int
      */
-    public function setTrueAmountAttribute($value)
+    public function setFormattedAmountAttribute($value)
     {
         $this->attributes['amount'] = $value * 100;
     }
@@ -28,7 +28,7 @@ class Transaction extends Model
      *
      * @return int
      */
-    public function getTrueAmountAttribute()
+    public function getFormattedAmountAttibute()
     {
         return $this->amount / 100;
     }
