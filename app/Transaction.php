@@ -8,14 +8,24 @@ use App\User;
 class Transaction extends Model
 {
     /**
-     * Defined the type id for credit.
+     * Defined the type id for Credit.
      *
      * @const int
      */
     const TYPE_CREDIT = 1;
+
+    /**
+     * Defined the type id for Debit.
+     *
+     * @const int
+     */
     const TYPE_DEBIT = 2;
 
-
+    /**
+     * Define the relationshop with user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
     public function user() {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
@@ -25,7 +35,7 @@ class Transaction extends Model
      *
      * @var int
      */
-    public function setFormattedAmountAttribute($value)
+    public function setFormattedAmountAttribute()
     {
         $this->attributes['amount'] = $value * 100;
     }

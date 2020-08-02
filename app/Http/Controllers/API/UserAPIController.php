@@ -10,8 +10,8 @@ class UserAPIController
 {
 
     /**
-     * Get Users and return for datatables
-     * @return View
+     * Get Users and return  for datatables
+     * @return Json
      */
     public function users(Request $request)
     {
@@ -23,8 +23,11 @@ class UserAPIController
         $users = User::with('notes')->when($request->has('search'), function ($query) use ($request) {
             $query->where('name', 'LIKE', "%{$request->search}%")->orWhere('email', 'LIKE', "%{$request->search}%");
         })->paginate($length)->toArray();
+
         $data = [];
+
         $counter = 0;
+
         foreach($users['data'] as $user) {
             $data[$counter] = [
                 'id' => $user['id'],

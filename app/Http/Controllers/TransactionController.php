@@ -32,7 +32,7 @@ class TransactionController extends Controller
 
 /**
      * Show create note page
-     * @param User $user
+     * @param Transaction $transaction
      * @return View
      */
     public function noteCreate(Transaction $transaction) {
@@ -40,7 +40,8 @@ class TransactionController extends Controller
     }
 
     /**
-     * Store a new user note
+     * Store a new transaction note
+     * @param Transaction $transaction
      * @param Request $request
      * @return redirect
      */
