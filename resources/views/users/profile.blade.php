@@ -18,6 +18,7 @@
                 <div class="col-md-8">
                     <h2>{{ $user->name }}</h2>
                     <h4>{{ $user->email }}</h4>
+                    <h4 class="{{ $user->balance >= 0 ? 'text-success' : 'text-danger' }}">{{ $user->balance }}</h4>
                 </div>
             </div>
         </div>

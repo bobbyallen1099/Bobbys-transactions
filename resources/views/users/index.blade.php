@@ -43,10 +43,16 @@
                             @endif
                         </td>
                         <td>
-                            {{$user->balance}}
+                            <span class="{{ $user->balance >= 0 ? 'text-success' : 'text-danger' }}">
+                                {{ $user->balance }}
+                            </span>
                         </td>
                         <td>
-                            {{ $user->notes()->latest()->first()->title }}
+                            @if ($user->notes->first())
+                                {{ $user->notes()->latest()->first()->title }}
+                            @else
+                                N/A
+                            @endif
                         </td>
                         <td>{{ Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
                         <td>

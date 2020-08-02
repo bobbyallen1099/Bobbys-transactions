@@ -64,4 +64,8 @@ class TransactionController extends Controller
         return redirect(route('admin.transactions.show', $transaction));
     }
 
+    public function getRawValueAttribute(Transaction $transaction) {
+        return $transaction->amount * ($transaction->type === Transaction::CREDIT_TYPE ? 1 : -1);
+    }
+
 }

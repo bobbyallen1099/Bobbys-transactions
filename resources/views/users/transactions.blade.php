@@ -14,20 +14,20 @@
     @endif
     <div class="card">
         @if ($user->transactions->first())
-        <table class="table table-border">
-            <thead>
-                <tr>
-                    <th class="border-top-0">Transaction amount</th>
-                    <th class="border-top-0">Transaction type</th>
-                    <th class="border-top-0">Transaction date</th>
-                </tr>
-            </thead>
-            <tbody>
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th class="border-top-0">Transaction amount</th>
+                        <th class="border-top-0">Transaction type</th>
+                        <th class="border-top-0">Transaction date</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($user->transactions as $transaction)
                         <tr>
                             <td>
                                 <span class="{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'text-success' : 'text-danger' }}">
-                                    {{ $transaction->type === App\Transaction::TYPE_CREDIT ? '+' : '-' }}£{{ $transaction->formattedAmount }}
+                                   £{{ $transaction->formattedAmount }}
                                 </span>
                             </td>
                             <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>

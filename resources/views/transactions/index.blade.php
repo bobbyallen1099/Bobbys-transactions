@@ -23,6 +23,7 @@
                 <tr>
                     <th class="border-top-0">Transaction amount</th>
                     <th class="border-top-0">User name</th>
+                    <th class="border-top-0">User balance</th>
                     <th class="border-top-0">Transaction type</th>
                     <th class="border-top-0">Transaction date</th>
                 </tr>
@@ -32,13 +33,16 @@
                     <tr>
                         <td>
                             <a class="{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'text-success' : 'text-danger' }}" href="{{ route('admin.transactions.show', $transaction) }}">
-                                {{ $transaction->type === App\Transaction::TYPE_CREDIT ? '+' : '-' }}£{{ $transaction->formattedAmount }}
+                                £{{ $transaction->formattedAmount }}
                             </a>
                         </td>
                         <td>
                             <a href="{{ route('admin.users.show', $transaction->user_id) }}">
                                 {{ $transaction->user()->first()->name }}
                             </a>
+                        </td>
+                        <td>
+                            {{ $transaction->user()->first()->balance }}
                         </td>
                         <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
                         <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
