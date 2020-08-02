@@ -34,13 +34,17 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::post('/edit', 'AdminUsersController@update')->name('update');
                     Route::get('/delete', 'AdminUsersController@confirmdelete')->name('confirmdelete');
                     Route::post('/delete', 'AdminUsersController@delete')->name('delete');
+                    Route::get('/note/create', 'AdminUsersController@notecreate')->name('note.create');
+                    Route::post('/note/store', 'AdminUsersController@notestore')->name('note.store');
                 });
             });
 
             Route::prefix('transactions')->name('transactions.')->group(function () {
                 Route::get('/', 'TransactionController@index')->name('index');
-                Route::prefix('{transactions}')->group(function () {
+                Route::prefix('{transaction}')->group(function () {
                     Route::get('/', 'TransactionController@show')->name('show');
+                    Route::get('/note/create', 'TransactionController@notecreate')->name('note.create');
+                    Route::post('/note/store', 'TransactionController@notestore')->name('note.store');
                 });
             });
         });

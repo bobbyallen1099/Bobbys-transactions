@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {{ Breadcrumbs::render('admin.users.index') }}
+    {{ Breadcrumbs::render('admin.transactions.index') }}
 
     @if(Session::has('message'))
         <div class="alert {{ Session::get('alert-class', 'alert-info') }}">
@@ -21,8 +21,8 @@
         <table class="table m-0">
             <thead>
                 <tr>
-                    <th class="border-top-0">User name</th>
                     <th class="border-top-0">Transaction amount</th>
+                    <th class="border-top-0">User name</th>
                     <th class="border-top-0">Transaction type</th>
                     <th class="border-top-0">Transaction date</th>
                 </tr>
@@ -31,11 +31,15 @@
                 @foreach ($transactions as $transaction)
                     <tr>
                         <td>
+                            <a class="{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'text-success' : 'text-danger' }}" href="{{ route('admin.transactions.show', $transaction) }}">
+                                {{ $transaction->type === App\Transaction::TYPE_CREDIT ? '+' : '-' }}£{{ $transaction->formattedAmount }}
+                            </a>
+                        </td>
+                        <td>
                             <a href="{{ route('admin.users.show', $transaction->user_id) }}">
                                 {{ $transaction->user()->first()->name }}
                             </a>
                         </td>
-                        <td>£{{ $transaction->formattedAmount }}</td>
                         <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
                         <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
                     </tr>

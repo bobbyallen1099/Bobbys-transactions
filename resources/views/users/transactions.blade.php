@@ -13,6 +13,7 @@
         </div>
     @endif
     <div class="card">
+        @if ($user->transactions->first())
         <table class="table table-border">
             <thead>
                 <tr>
@@ -22,14 +23,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($user->transactions as $transaction)
-                    <tr>
-                        <td>£{{ $transaction->formattedAmount }}</td>
-                        <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
-                        <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    @foreach ($user->transactions as $transaction)
+                        <tr>
+                            <td>£{{ $transaction->formattedAmount }}</td>
+                            <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
+                            <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="alert alert-danger">No transactions</div>
+        @endif
     </div>
 @endsection

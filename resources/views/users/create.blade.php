@@ -12,7 +12,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.users.create') }}">
+    <form method="POST" action="{{ route('admin.users.store') }}">
         @csrf
         <div class="card card-body">
             <h2 class="mb-4">Add new user</h2>

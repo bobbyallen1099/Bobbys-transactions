@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Note;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
@@ -146,5 +147,39 @@ class AdminUsersController
         Session::flash('alert-class', 'alert-success');
 
         return redirect(route('admin.users.index'));
+    }
+
+    /**
+     * Show create note page
+     * @param User $user
+     * @return View
+     */
+    public function notecreate(User $user) {
+        return view('users.createnote', compact('user'));
+    }
+
+    /**
+     * Store a new user note
+     * @param Request $request
+     * @return redirect
+     */
+    public function notestore(User $user, Request $request) {
+
+        $validatedData = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+        ]);
+
+        $note = $user->notes()->create([
+            'entity_id' => $user->id,
+            'title' => $request->title,
+            'description' => $request->description
+        ]);
+
+        Session::flash('message', 'Successfully added note');
+        Session::flash('name', $request->title);
+        Session::flash('alert-class', 'alert-success');
+
+        return redirect(route('admin.users.show', $user));
     }
 }

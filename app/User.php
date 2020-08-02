@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Transaction;
+use App\Note;
 
 class User extends Authenticatable
 {
@@ -47,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
+
+    /**
+     * Define note relationshop
+     * @return \Illuminate\Database\Eloquent\Relations\morphMany
+     */
+    public function notes()
+    {
+      return $this->morphMany(Note::class, 'entity');
+    }
+
 }

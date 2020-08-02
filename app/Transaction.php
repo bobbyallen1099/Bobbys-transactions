@@ -39,5 +39,13 @@ class Transaction extends Model
         return $this->amount / 100;
     }
 
+    /**
+     * Define note relationshop
+     * @return \Illuminate\Database\Eloquent\Relations\morphMany
+     */
+    public function notes()
+    {
+      return $this->morphMany(Note::class, 'entity');
+    }
 
 }

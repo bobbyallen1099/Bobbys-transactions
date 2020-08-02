@@ -25,8 +25,9 @@
                 <tr>
                     <th class="border-top-0">Email</th>
                     <th class="border-top-0">Admin</th>
+                    <th class="border-top-0">User balance</th>
+                    <th class="border-top-0">Last note title</th>
                     <th class="border-top-0">Created on</th>
-                    <th class="border-top-0">Modified on</th>
                     <th class="border-top-0" width="150">Actions</th>
                 </tr>
             </thead>
@@ -41,8 +42,12 @@
                                 No
                             @endif
                         </td>
+                        <td>
+                        </td>
+                        <td>
+                            {{ $user->notes()->first()->title }}
+                        </td>
                         <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
                         <td>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-xs">Edit</a>
