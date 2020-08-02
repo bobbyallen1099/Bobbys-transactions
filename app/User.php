@@ -50,6 +50,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user balance
+     * @return int
+     */
+    public function getBalanceAttribute()
+    {
+        $credit = $this->transactions()->whereType(Transaction::TYPE_CREDIT)->sum('amount');
+        $debit = $this->transactions()->whereType(Transaction::TYPE_DEBIT)->sum('amount');
+        return ($credit - $debit) / 100;
+    }
+
+    /**
      * Define note relationshop
      * @return \Illuminate\Database\Eloquent\Relations\morphMany
      */

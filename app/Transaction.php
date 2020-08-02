@@ -13,6 +13,7 @@ class Transaction extends Model
      * @const int
      */
     const TYPE_CREDIT = 1;
+    const TYPE_DEBIT = 2;
 
 
     public function user() {
@@ -38,6 +39,7 @@ class Transaction extends Model
     {
         return $this->amount / 100;
     }
+
 
     /**
      * Define note relationshop

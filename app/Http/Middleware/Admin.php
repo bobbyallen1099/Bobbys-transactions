@@ -19,6 +19,6 @@ class Admin {
             return $next($request);
         }
 
-        throw new BadRequestHttpException('no permission');
+        return redirect('');
     }
 }

@@ -22,4 +22,33 @@
             </div>
         </div>
     </div>
+
+    <div class="card mt-3">
+        @if ($user->transactions->first())
+        <table class="table table-border">
+            <thead>
+                <tr>
+                    <th class="border-top-0">Transaction amount</th>
+                    <th class="border-top-0">Transaction type</th>
+                    <th class="border-top-0">Transaction date</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach ($user->transactions as $transaction)
+                        <tr>
+                            <td>
+                                <span class="{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'text-success' : 'text-danger' }}">
+                                    {{ $transaction->type === App\Transaction::TYPE_CREDIT ? '+' : '-' }}£{{ $transaction->formattedAmount }}
+                                </span>
+                            </td>
+                            <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
+                            <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="alert alert-danger">No transactions</div>
+        @endif
+    </div>
 @endsection

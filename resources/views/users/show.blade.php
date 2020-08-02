@@ -42,7 +42,7 @@
                     <a href="{{ route('admin.users.note.create', $user) }}" class="btn btn-primary">Add a new note</a>
                 </div>
                 <div class="card-body">
-                    @foreach ($user->notes as $note)
+                    @foreach ($user->notes()->latest()->get() as $note)
                         <div class="card p-3 mb-3">
                             <h5>{{ $note->title }}</h5>
                             <p class="mb-0">{{ $note->description }}</p>

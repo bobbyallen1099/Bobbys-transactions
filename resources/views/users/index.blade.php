@@ -43,11 +43,12 @@
                             @endif
                         </td>
                         <td>
+                            {{$user->balance}}
                         </td>
                         <td>
-                            {{ $user->notes()->first()->title }}
+                            {{ $user->notes()->latest()->first()->title }}
                         </td>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
                         <td>
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-xs">Edit</a>

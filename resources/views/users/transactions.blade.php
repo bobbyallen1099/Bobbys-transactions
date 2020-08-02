@@ -25,7 +25,11 @@
             <tbody>
                     @foreach ($user->transactions as $transaction)
                         <tr>
-                            <td>£{{ $transaction->formattedAmount }}</td>
+                            <td>
+                                <span class="{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'text-success' : 'text-danger' }}">
+                                    {{ $transaction->type === App\Transaction::TYPE_CREDIT ? '+' : '-' }}£{{ $transaction->formattedAmount }}
+                                </span>
+                            </td>
                             <td>{{ $transaction->type === App\Transaction::TYPE_CREDIT ? 'Credit' : 'Debit' }}</td>
                             <td>{{ Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y')}}</td>
                         </tr>

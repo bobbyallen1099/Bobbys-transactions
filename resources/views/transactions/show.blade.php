@@ -3,7 +3,7 @@
 @section('content')
 
 
-    {{-- {{ Breadcrumbs::render('admin.transactions.show', $transaction) }} --}}
+    {{ Breadcrumbs::render('admin.transactions.show', $transaction) }}
 
     @if(Session::has('message'))
         <div class="alert {{ Session::get('alert-class', 'alert-info') }}">
@@ -49,11 +49,11 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h3 class="m-0">User notes</h3>
+                    <h3 class="m-0">Transaction notes</h3>
                     <a href="{{ route('admin.transactions.note.create', $transaction) }}" class="btn btn-primary">Add a new note</a>
                 </div>
                 <div class="card-body">
-                    @foreach ($transaction->notes as $note)
+                    @foreach ($transaction->notes()->latest()->get() as $note)
                         <div class="card p-3 mb-3">
                             <h5>{{ $note->title }}</h5>
                             <p class="mb-0">{{ $note->description }}</p>
