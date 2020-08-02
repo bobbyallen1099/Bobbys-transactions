@@ -13,7 +13,7 @@ class UserAPIController
      * Get Users and return for datatables
      * @return View
      */
-    public function getUsersDataTables(Request $request)
+    public function users(Request $request)
     {
         $search = $request->search;
         $length = $request->length;

@@ -16,5 +16,5 @@ use App\User;
 */
 
 Route::middleware('admin')->group(function () {
-    Route::get('/users', 'UserAPIController@getUsersDataTables');
+    Route::get('/users', 'UserAPIController@users');
 });
