@@ -35,7 +35,7 @@ class TransactionController extends Controller
      * @param User $user
      * @return View
      */
-    public function notecreate(Transaction $transaction) {
+    public function noteCreate(Transaction $transaction) {
         return view('transactions.createnote', compact('transaction'));
     }
 
@@ -44,7 +44,7 @@ class TransactionController extends Controller
      * @param Request $request
      * @return redirect
      */
-    public function notestore(Transaction $transaction, Request $request) {
+    public function noteStore(Transaction $transaction, Request $request) {
 
         $validatedData = $request->validate([
             'title' => ['required', 'string', 'max:255'],

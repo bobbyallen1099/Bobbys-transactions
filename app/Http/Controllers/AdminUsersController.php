@@ -10,7 +10,7 @@ use Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AdminUsersController
+class AdminUsersController extends Controller
 {
 
     /**
@@ -23,6 +23,7 @@ class AdminUsersController
 
         return view('users.index', compact('users'));
     }
+
 
     /**
      * Show create form
@@ -154,7 +155,7 @@ class AdminUsersController
      * @param User $user
      * @return View
      */
-    public function notecreate(User $user) {
+    public function noteCreate(User $user) {
         return view('users.createnote', compact('user'));
     }
 
@@ -163,7 +164,7 @@ class AdminUsersController
      * @param Request $request
      * @return redirect
      */
-    public function notestore(User $user, Request $request) {
+    public function noteStore(User $user, Request $request) {
 
         $validatedData = $request->validate([
             'title' => ['required', 'string', 'max:255'],

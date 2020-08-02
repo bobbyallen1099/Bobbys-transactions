@@ -19,8 +19,9 @@
         </div>
     </div>
 
-    <div class="card white card-body p-0">
-        <table class="table m-0">
+    <div class="card white card-body p-3">
+        <users-component></users-component>
+        {{-- <table class="table m-0">
             <thead>
                 <tr>
                     <th class="border-top-0">Email</th>
@@ -63,6 +64,6 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
     </div>
 @endsection
